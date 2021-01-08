@@ -3,6 +3,7 @@ import {
   Text,
   View,
   TouchableOpacity,
+  TouchableHighlight,
   SafeAreaView,
   TextInput,
 } from "react-native";
@@ -39,7 +40,7 @@ export const HeaderTitle = styled.Text`
   font-size: 35px;
   font-weight: bold;
   color: ${colors.tertiary};
-  letter-spacing: 2;
+  letter-spacing: 2px;
   font-style: italic;
 `;
 export const HeaderButton = styled.TouchableOpacity`
@@ -48,27 +49,50 @@ export const HeaderButton = styled.TouchableOpacity`
 `;
 
 // List
-export const ListView = styled.View`
+export const ListContainer = styled.View`
+  margin-bottom: 30px;
+  flex: 1;
+  padding-bottom: 40px;
+`
+
+export const ListView = styled.TouchableHighlight`
   background-color: ${colors.secondary};
   min-height: 85px;
   width: 100%;
   padding: 15px;
-  justify-content: center;
+  justify-content: space-around;
   margin-bottom: 15px;
   border-radius: 10px;
 `;
 
+export const ListViewHidden = styled.View`
+  background-color: ${colors.tertiary};
+  min-height: 85px;
+  width: 100%;
+  padding: 15px;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  border-radius: 11px;
+`;
+
+export const HiddenButton = styled.TouchableOpacity`
+  width: 55px;
+  align-items: center;
+`;
+
 export const TodoText = styled.Text`
-    font-size: 16px;
-    letter-spacing: 1px;
-    color: ${colors.tertiary};
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: ${colors.tertiary};
 `;
 
 export const TodoDate = styled.Text`
-font-size: 12px;
-    letter-spacing: 1px;
-    color: ${colors.alternative};
-    text-align: right;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: ${colors.alternative};
+  text-align: right;
+  text-transform: uppercase;
 `;
 
 // Modal
@@ -80,7 +104,8 @@ export const ModalButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   align-self: center;
-  top: -15px;
+  position: absolute;
+  bottom: 15px;
 `;
 
 export const ModalContainer = styled.View`

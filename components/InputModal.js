@@ -13,14 +13,33 @@ import {
 } from "./../styles/appStyles";
 import { AntDesign } from "@expo/vector-icons";
 
-const InputModal = ({ modalVisible, setModalVisible, addTodo }) => {
-  const [todoValue, setTodoValue] = useState();
+const InputModal = ({
+  modalVisible,
+  setModalVisible,
+  addTodo,
+  editItem,
+  todoValue,
+  setTodoValue,
+  editTodo,
+  todos
+}) => {
+  // const [todoValue, setTodoValue] = useState();
 
   const handleSubmit = () => {
-    addTodo({
-      title: todoValue,
-      date: new Date().toLocaleString(),
-    });
+    if (!editItem) {
+      addTodo({
+        title: todoValue,
+        date: new Date().toUTCString(),
+        key: `${todos.length + 1}`
+      });
+    } else {
+      editTodo({
+        title: todoValue,
+        date: editItem.date,
+        key: editItem.key
+      });
+    }
+
     setTodoValue("");
   };
 

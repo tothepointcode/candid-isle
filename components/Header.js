@@ -12,13 +12,11 @@ import {
 // Icons
 import { Entypo, AntDesign } from "@expo/vector-icons";
 
-const Header = () => {
+const Header = ({ clearTodos }) => {
   return (
     <HeaderView>
-      <HeaderTitle>
-        Todos
-      </HeaderTitle>
-      <HeaderButton>
+      <HeaderTitle>Todos</HeaderTitle>
+      <HeaderButton onPress={clearTodos}>
         <Entypo name="trash" size={25} color={colors.tertiary} />
       </HeaderButton>
     </HeaderView>
