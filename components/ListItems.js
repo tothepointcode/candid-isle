@@ -1,5 +1,4 @@
 import React from "react";
-import { Text, ScrollView } from "react-native";
 
 // styled components
 import {
@@ -8,24 +7,16 @@ import {
   TodoText,
   TodoDate,
   HiddenButton,
-  ListContainer,
   colors,
 } from "../styles/appStyles";
 
-import { View, TouchableOpacity } from "react-native";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { Entypo } from "@expo/vector-icons";
 
-const ListItems = ({ todos, setTodos, triggerEdit }) => {
-  // List things
-  const closeRow = (rowMap, rowKey) => {
-    if (rowMap[rowKey]) {
-      rowMap[rowKey].closeRow();
-    }
-  };
+const ListItems = ({ todos, setTodos, handleTriggerEdit }) => {
 
-  const deleteTodo = (rowMap, rowKey) => {
-    closeRow(rowMap, rowKey);
+  // List things
+  const handleDeleteTodo = (rowMap, rowKey) => {
     const newTodos = [...todos];
     const todoIndex = todos.findIndex((todo) => todo.key === rowKey);
     newTodos.splice(todoIndex, 1);
@@ -42,7 +33,7 @@ const ListItems = ({ todos, setTodos, triggerEdit }) => {
             <ListView
               underlayColor={colors.primary}
               onPress={() => {
-                triggerEdit(data.item);
+                handleTriggerEdit(data.item);
               }}
             >
               <>
@@ -53,7 +44,7 @@ const ListItems = ({ todos, setTodos, triggerEdit }) => {
           )}
           renderHiddenItem={(data, rowMap) => (
             <ListViewHidden>
-              <HiddenButton onPress={() => deleteTodo(rowMap, data.item.key)}>
+              <HiddenButton onPress={() => handleDeleteTodo(rowMap, data.item.key)}>
                 <Entypo name="trash" size={25} color={colors.secondary} />
               </HiddenButton>
             </ListViewHidden>

@@ -1,5 +1,4 @@
 import React from "react";
-import { View, Text } from "react-native";
 
 // styled components
 import {
@@ -10,13 +9,13 @@ import {
 } from "./../styles/appStyles";
 
 // Icons
-import { Entypo, AntDesign } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
-const Header = ({ clearTodos }) => {
+const Header = ({ handleClearTodos }) => {
   return (
     <HeaderView>
       <HeaderTitle>Todos</HeaderTitle>
-      <HeaderButton onPress={clearTodos}>
+      <HeaderButton onPress={handleClearTodos}>
         <Entypo name="trash" size={25} color={colors.tertiary} />
       </HeaderButton>
     </HeaderView>

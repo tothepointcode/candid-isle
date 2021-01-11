@@ -16,31 +16,36 @@ import { AntDesign } from "@expo/vector-icons";
 const InputModal = ({
   modalVisible,
   setModalVisible,
-  addTodo,
-  editItem,
-  todoValue,
-  setTodoValue,
-  editTodo,
-  todos
+  handleAddTodo,
+  todoToBeEdited,
+  setTodoToBeEdited,
+  todoInputValue,
+  setTodoInputValue,
+  handleEditTodo,
+  todos,
 }) => {
-  // const [todoValue, setTodoValue] = useState();
-
   const handleSubmit = () => {
-    if (!editItem) {
-      addTodo({
-        title: todoValue,
+    if (!todoToBeEdited) {
+      handleAddTodo({
+        title: todoInputValue,
         date: new Date().toUTCString(),
-        key: `${todos.length + 1}`
+        key: `${parseInt(todos[todos.length - 1].key) + 1}`,
       });
     } else {
-      editTodo({
-        title: todoValue,
-        date: editItem.date,
-        key: editItem.key
+      handleEditTodo({
+        title: todoInputValue,
+        date: todoToBeEdited.date,
+        key: todoToBeEdited.key,
       });
     }
 
-    setTodoValue("");
+    setTodoInputValue("");
+  };
+
+  const handleCloseModal = () => {
+    setTodoInputValue("");
+    setModalVisible(false);
+    setTodoToBeEdited(null);
   };
 
   return (
@@ -53,9 +58,7 @@ const InputModal = ({
         animationType="slide"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(false);
-        }}
+        onRequestClose={handleCloseModal}
       >
         <ModalContainer>
           <ModalView>
@@ -68,20 +71,14 @@ const InputModal = ({
               placeholder="Add a todo"
               placeholderTextColor={colors.alternative}
               selectionColor={colors.secondary}
-              onChangeText={(text) => setTodoValue(text)}
-              value={todoValue}
+              onChangeText={(text) => setTodoInputValue(text)}
+              value={todoInputValue}
               autoFocus={true}
               onSubmitEditing={handleSubmit}
             />
 
             <ModalActionGroup>
-              <ModalAction
-                onPress={() => {
-                  setTodoValue("");
-                  setModalVisible(false);
-                }}
-                color={colors.primary}
-              >
+              <ModalAction onPress={handleCloseModal} color={colors.primary}>
                 <AntDesign name="close" size={28} color={colors.tertiary} />
               </ModalAction>
               <ModalAction onPress={handleSubmit} color={colors.tertiary}>
