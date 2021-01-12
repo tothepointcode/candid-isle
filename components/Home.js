@@ -31,7 +31,6 @@ const Home = () => {
     const newTodos = [...todos, todo];
     setTodos(newTodos);
     setModalVisible(false);
-    console.log(todos);
   };
 
   // edit existing todo item
@@ -40,7 +39,7 @@ const Home = () => {
   const handleTriggerEdit = (item) => {
     setTodoToBeEdited(item);
     setModalVisible(true);
-    setInputTodoValue(item.title);
+    setTodoInputValue(item.title);
   };
 
   const handleEditTodo = (editedTodo) => {

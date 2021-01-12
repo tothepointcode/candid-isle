@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // styled components
 import {
@@ -7,6 +7,7 @@ import {
   TodoText,
   TodoDate,
   HiddenButton,
+  SwipedTodoText,
   colors,
 } from "../styles/appStyles";
 
@@ -14,7 +15,6 @@ import { SwipeListView } from "react-native-swipe-list-view";
 import { Entypo } from "@expo/vector-icons";
 
 const ListItems = ({ todos, setTodos, handleTriggerEdit }) => {
-
   // List things
   const handleDeleteTodo = (rowMap, rowKey) => {
     const newTodos = [...todos];
@@ -23,28 +23,37 @@ const ListItems = ({ todos, setTodos, handleTriggerEdit }) => {
     setTodos(newTodos);
   };
 
+  // For styling currently swiped todo row
+  const [swipedRow, setSwipedRow] = useState(null);
+
   return (
     <>
       {todos.length == 0 && <TodoText>You have no todos today</TodoText>}
       {todos.length != 0 && (
         <SwipeListView
           data={todos}
-          renderItem={(data, rowMap) => (
-            <ListView
-              underlayColor={colors.primary}
-              onPress={() => {
-                handleTriggerEdit(data.item);
-              }}
-            >
-              <>
-                <TodoText>{data.item.title}</TodoText>
-                <TodoDate>{data.item.date}</TodoDate>
-              </>
-            </ListView>
-          )}
+          renderItem={(data) => {
+            const RowText =
+              data.item.key == swipedRow ? SwipedTodoText : TodoText;
+            return (
+              <ListView
+                underlayColor={colors.primary}
+                onPress={() => {
+                  handleTriggerEdit(data.item);
+                }}
+              >
+                <>
+                  <RowText>{data.item.title}</RowText>
+                  <TodoDate>{data.item.date}</TodoDate>
+                </>
+              </ListView>
+            );
+          }}
           renderHiddenItem={(data, rowMap) => (
             <ListViewHidden>
-              <HiddenButton onPress={() => handleDeleteTodo(rowMap, data.item.key)}>
+              <HiddenButton
+                onPress={() => handleDeleteTodo(rowMap, data.item.key)}
+              >
                 <Entypo name="trash" size={25} color={colors.secondary} />
               </HiddenButton>
             </ListViewHidden>
@@ -56,6 +65,14 @@ const ListItems = ({ todos, setTodos, handleTriggerEdit }) => {
           disableLeftSwipe={true}
           showsVerticalScrollIndicator={false}
           style={{ flex: 1, paddingBottom: 30, marginBottom: 40 }}
+
+          // Handling swiped todo row
+          onRowOpen={(rowKey) => {
+            setSwipedRow(rowKey);
+          }}
+          onRowClose={() => {
+            setSwipedRow(null);
+          }}
         />
       )}
     </>

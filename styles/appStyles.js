@@ -53,7 +53,7 @@ export const ListContainer = styled.View`
   margin-bottom: 30px;
   flex: 1;
   padding-bottom: 40px;
-`
+`;
 
 export const ListView = styled.TouchableHighlight`
   background-color: ${colors.secondary};
@@ -93,6 +93,13 @@ export const TodoDate = styled.Text`
   color: ${colors.alternative};
   text-align: right;
   text-transform: uppercase;
+`;
+
+// Text for swiped todo row
+export const SwipedTodoText = styled(TodoText)`
+  color: ${colors.alternative};
+  font-style: italic;
+  text-decoration: line-through;
 `;
 
 // Modal
