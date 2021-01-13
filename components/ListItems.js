@@ -14,13 +14,21 @@ import {
 import { SwipeListView } from "react-native-swipe-list-view";
 import { Entypo } from "@expo/vector-icons";
 
+// Async Storage
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const ListItems = ({ todos, setTodos, handleTriggerEdit }) => {
   // List things
   const handleDeleteTodo = (rowMap, rowKey) => {
     const newTodos = [...todos];
     const todoIndex = todos.findIndex((todo) => todo.key === rowKey);
     newTodos.splice(todoIndex, 1);
-    setTodos(newTodos);
+
+    AsyncStorage.setItem("storedTodos", JSON.stringify(newTodos))
+      .then(() => {
+        setTodos(newTodos);
+      })
+      .catch((error) => console.log(error));
   };
 
   // For styling currently swiped todo row
@@ -65,7 +73,6 @@ const ListItems = ({ todos, setTodos, handleTriggerEdit }) => {
           disableLeftSwipe={true}
           showsVerticalScrollIndicator={false}
           style={{ flex: 1, paddingBottom: 30, marginBottom: 40 }}
-
           // Handling swiped todo row
           onRowOpen={(rowKey) => {
             setSwipedRow(rowKey);

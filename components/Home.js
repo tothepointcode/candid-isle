@@ -5,23 +5,10 @@ import Header from "./Header";
 import ListItems from "./ListItems";
 import InputModal from "./InputModal";
 
-const Home = () => {
-  // todo initial list
-  const initialTodos = [
-    {
-      title: "Go and get some snacks",
-      date: "Fri, 08 Jan 2021 16:32:11 GMT",
-      key: "1",
-    },
-    { title: "Go shopping", date: "Fri, 08 Jan 2021 16:34:11 GMT", key: "2" },
-    {
-      title: "Create a new video",
-      date: "Fri, 08 Jan 2021 16:34:11 GMT",
-      key: "3",
-    },
-  ];
-  const [todos, setTodos] = useState(initialTodos);
+// Async Storage
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
+const Home = ({ todos, setTodos }) => {
   // Modal visibility & input value
   const [modalVisible, setModalVisible] = useState(false);
   const [todoInputValue, setTodoInputValue] = useState();
@@ -29,8 +16,14 @@ const Home = () => {
   // function to add new todo
   const handleAddTodo = (todo) => {
     const newTodos = [...todos, todo];
-    setTodos(newTodos);
-    setModalVisible(false);
+
+    // Saving to async storage
+    AsyncStorage.setItem("storedTodos", JSON.stringify(newTodos))
+      .then(() => {
+        setTodos(newTodos);
+        setModalVisible(false);
+      })
+      .catch((error) => console.log(error));
   };
 
   // edit existing todo item
@@ -46,14 +39,25 @@ const Home = () => {
     const newTodos = [...todos];
     const todoIndex = todos.findIndex((todo) => todo.key === editedTodo.key);
     newTodos.splice(todoIndex, 1, editedTodo);
-    setTodos(newTodos);
-    setTodoToBeEdited(null);
-    setModalVisible(false);
+
+    // Saving to async storage
+    AsyncStorage.setItem("storedTodos", JSON.stringify(newTodos))
+      .then(() => {
+        setTodos(newTodos);
+        setTodoToBeEdited(null);
+        setModalVisible(false);
+      })
+      .catch((error) => console.log(error));
   };
 
   // clear all todos
   const handleClearTodos = () => {
-    setTodos([]);
+    // Saving to async storage
+    AsyncStorage.setItem("storedTodos", JSON.stringify([]))
+      .then(() => {
+        setTodos([]);
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
