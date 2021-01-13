@@ -25,7 +25,6 @@ export default function App() {
         if (data !== null) {
           setTodos(JSON.parse(data));
         }
-        alert("done");
       })
       .catch((error) => console.log(error));
   };
