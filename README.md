@@ -1,6 +1,6 @@
 # Candid Isle Todos
 
-This is a simple todo list application built with expo and react native for a tutorial on my YouTube channel.
+This is a simple todo list application built with expo and react native for a tutorial on my [YouTube channel](https://www.youtube.com/channel/UCWUk0Y_h1bLvB8qLZ4lAS8A?sub_confirmation=1).
 
 ## Link to video
 
