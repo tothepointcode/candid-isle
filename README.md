@@ -2,10 +2,14 @@
 
 This is a simple todo list application built with expo and react native for a tutorial on my YouTube channel.
 
-## Tools Used
+## Link to video
 
-- [Expo](https://docs.expo.io/)
-- [React Native](https://reactnative.dev/)
+* [Part I - Creating all Screens and features](https://youtu.be/0c0v_40MPq8)
+
+* [Part II - Persisting data with Async-Storage](https://youtu.be/1BXx39IMqEY)
+
+* [Part III - Adding Splash screen and App Icon](https://youtu.be/o1zK-0buE-U)
+
 
 ## Screenshots
 
@@ -14,7 +18,7 @@ This is a simple todo list application built with expo and react native for a tu
 ![Splash Screen & Icon](assets/shot2.png)
 
 
-## Link to video
+## Tools Used
 
-* [Part I](https://youtu.be/0c0v_40MPq8)
-
+- [Expo](https://docs.expo.io/)
+- [React Native](https://reactnative.dev/)
