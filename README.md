@@ -2,7 +2,11 @@
 
 This is a simple todo list application built with expo and react native for a tutorial on my [YouTube channel](https://www.youtube.com/channel/UCWUk0Y_h1bLvB8qLZ4lAS8A?sub_confirmation=1).
 
-## Link to video
+## Link to Application on Google Play store
+
+[Todo App](https://play.google.com/store/apps/details?id=ttpc.todoapp)
+
+## Video Links
 
 * [Part I - Creating all Screens and features](https://youtu.be/0c0v_40MPq8)
 
@@ -10,6 +14,7 @@ This is a simple todo list application built with expo and react native for a tu
 
 * [Part III - Adding Splash screen and App Icon](https://youtu.be/o1zK-0buE-U)
 
+* [Publishing to the Google Play Store](https://www.youtube.com/playlist?list=PLk8gdrb2DmCjsRsDIwMBJdf350qKMiJ8R)
 
 ## Screenshots
 
